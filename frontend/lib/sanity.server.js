@@ -9,7 +9,7 @@ export const sanityClient = createClient(config)
 export const previewClient = createClient({
     ...config,
     useCdn: false, // for the preview mode
-    token: 'skpQzC7HoQxBPNmWF5HvMW3LPz08EIA6ddpxJHM7PmgSUzajybb7e5mKOCVg3JHnpkoVgexYnsYWYRqEKY0VfAEW3rBZVsQE1RpUsiPtAZkFHl6L92vKyVpYO2qz67J3rLGYT6nTGIkIm2eCruP92BA8XmE3cjSJAxJlCynXn47Nz5QNiPBN'
+    token: process.env.NEXT_PUBLIC_SANITY
 })
 
 // for easy switching between 'normal' client and 'preview' clientWidth
