@@ -6,7 +6,7 @@ import { getClient } from "../lib/sanity.server"
 import Card from "../components/Card"
 
 const Home = ({ posts }) => {
-  console.log(posts);
+  // console.log(posts); // DEBUG
   return (
     <div className="dashboard">
       <Head>
@@ -18,7 +18,9 @@ const Home = ({ posts }) => {
         {posts?.map((post) => (
           <Link
             key={post._id}
-            href="/"
+            href="/posts/[slug]"
+            as={`/posts/${post.slug.current}`}
+            passHref
           >
             <Card post={post} />
           </Link>
@@ -29,7 +31,7 @@ const Home = ({ posts }) => {
 }
 
 // request to Sanity DB
-export async function getStaticProps({ preview = false}) {  // not in preview mode
+export const getStaticProps = async ({ preview = false}) => {  // not in preview mode
   const posts = await getClient(preview).fetch(groq`
     *[_type == "post" && publishedAt < now()] | order(publishedAt desc) {
       _id,
